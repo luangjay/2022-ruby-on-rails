@@ -1,0 +1,15 @@
+<h1>Edit subject</h1>
+
+<%= form_with url: "/main/edit/#{@g.id}", method: :post, data: {turbo:false} do |form| %>
+  <%= form.hidden_field :op, value: 'validate' %>
+  <table>
+    <tr>
+      <td><%= form.text_field :'name', value: @g.name %></td>
+      <td><%= form.text_field :'score', value: @g.score %></td>
+      <% if @fill then %>
+        <td>fill in NOW!</td>
+      <% end %>
+    </tr>
+  </table>
+  <%= form.submit "done" %>
+<% end %>

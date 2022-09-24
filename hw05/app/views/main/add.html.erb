@@ -1,0 +1,18 @@
+<h1>Add subject</h1>
+
+<%= form_with url: '/main/add', method: :post, data: {turbo:false} do |form| %>
+  <%= form.hidden_field :num, value: @num %>
+  <%= form.hidden_field :op, value: 'validate' %>
+  <table>
+    <% @num.times do |i| %>
+      <tr>
+        <td><%= form.text_field :'subject[name][]', value: @ln[i] %></td>
+        <td><%= form.text_field :'subject[score][]', value: @ls[i] %></td>
+        <% if @fill[i] then %>
+        <td>fill in NOW!</td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <%= form.submit "done" %>
+<% end %>

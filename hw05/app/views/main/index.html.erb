@@ -1,0 +1,40 @@
+<style>
+  .data-header {font-weight: bold; width: 8vw; border: 1px solid black;}
+  .data {width: 8vw; border: 1px solid black;}
+</style>
+
+<h1>Snake snake fish fish ruby</h1>
+
+<u><h3>Result</h3></u>
+<% if not @lg.blank? then %>
+  <h3 style='color:green'>NNN approves you!</h3>
+  <p>bEsT sU6J3cT: <%= @max_g.name %><p>
+  <p>mAx sK0rE: <%= @max_g.score %><p>
+<% else %>
+  <h3 style='color:red'>NNN cries!</h3>
+<% end %>
+
+<h3>Database</h3>
+<table>
+  <tr>
+    <th class='data-header'>subjekt</th>
+    <th class='data-header'>skore</th>
+  </tr>
+  <% @lg.each do |g| %>
+    <tr>
+      <td class='data'><%= g.name %></td>
+      <td class='data'><%= g.score %></td>
+      <td><%= button_to 'edit', "/main/edit/#{g.id}", method: :post, data: {turbo: false} %></td>
+      <td><%= button_to 'delete', "main/delete/#{g.id}", method: :post %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <td><%= button_to 'add', '/main/add', method: :post, data: {turbo: false} %></td>
+    <td><%= button_to 'kaboom', "main/delete-all", method: :post %></td>
+  </tr>
+<table>

@@ -1,0 +1,8 @@
+<h1>Add subject</h1>
+
+<%= form_with url: "/main/add", method: :post, data: {turbo:false} do |form| %>
+  <%= form.hidden_field :op, value: 'add' %>
+  <%= form.label :num, "# of subjects:" %>
+  <%= form.select :num, (1..10).to_a, selected: 3 %>
+  <%= form.submit 'ok' %>
+<% end %>
