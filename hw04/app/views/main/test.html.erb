@@ -1,0 +1,18 @@
+<h1>Main#test</h1>
+<p>Find me in app/views/main/test.html.erb</p>
+
+<%= form_with url: '/main/test', method: :post, data: {turbo:false} do |form| %>
+  <%= form.hidden_field :num, value: @num %>
+  <table>
+    <% @num.times do |i| %>
+      <tr>
+        <td><%= form.text_field :'subject[name][]', value: @ln[i] %></td>
+        <td><%= form.text_field :'subject[score][]', value: @ls[i] %></td>
+        <% if @fill[i] then %>
+        <td>fill in NOW!</td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <%= form.submit "done" %>
+<% end %>

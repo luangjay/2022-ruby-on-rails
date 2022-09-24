@@ -1,0 +1,7 @@
+<h1>Snake snake fish fish ruby</h1>
+
+<%= form_with url: "/main/test", method: :get, data: {turbo:false} do |form| %>
+  <%= form.label :num, "#:" %>
+  <%= form.select :num, (1..10).to_a, selected: 3 %>
+  <%= form.submit 'ok' %>
+<% end %>
