@@ -1,0 +1,31 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Scores</h1>
+
+<% if !@scores.blank? %>
+  <p><b>Best Subject: </b><%= @max_subject %> with score <%= @max_score %></p>
+  <p><b>Average Score: </b><%= @avg_score %></p>
+
+  <div id="scores">
+    <table>
+      <tr>
+        <th>Subject</th>
+        <th>Point</th>
+        <th>Grade</th>
+      </tr>
+      <% @scores.each do |score| %>
+        <tr>
+          <td><%= score.subject %></td>
+          <td><%= score.point %></td>
+          <td><%= score.grade %></td>
+          <td><%= button_to "Edit", edit_score_path(score), params: {qstudent: true, qstudentid: params[:id]}, method: :get %></td>
+          <td><%= button_to "Destroy", score, params: {qstudent: true, qstudentid: params[:id]}, method: :delete %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+<% end %>
+
+<%= link_to "Back to students", students_path %> |
+<%= link_to "New score", new_score_path(qstudent: true, qstudentid: params[:id]) %>
+

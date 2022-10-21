@@ -1,0 +1,14 @@
+<h1>Editing score</h1>
+
+<%= render "form", score: @score %>
+
+<br>
+
+<div>
+  <%= link_to "Show this score", score_url(@score, qstudent: params[:qstudent], qstudentid: params[:qstudentid]) %> |
+  <% if params[:qstudent]=='true' %>
+    <%= link_to "Back to scores", edit_student_score_path(id: @score.student_id) %>
+  <% else %>
+    <%= link_to "Back to scores", scores_path %>
+  <% end %>
+</div>
