@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @student %>
+
+<div>
+  <% if session[:login] %>
+  <%= link_to "Edit this student", edit_student_path(@student) %> |
+  <% end %>
+  <%= link_to "Edit score", edit_student_score_path(@student) %> |
+  <%= link_to "Back to students", students_path %>
+
+  <% if session[:login] %>
+  <%= button_to "Destroy this student", @student, class: "btn btn-primary", method: :delete %>
+  <% end %>
+</div>

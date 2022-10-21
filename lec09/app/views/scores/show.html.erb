@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @score %>
+
+<div>
+  <%= link_to "Edit this score", edit_score_path(@score, qstudent: params[:qstudent], qstudentid: params[:qstudentid]) %> |
+  <% if params[:qstudent]=='true' %>
+    <%= link_to "Back to scores", edit_student_score_path(id: @score.student_id) %>
+  <% else %>
+    <%= link_to "Back to scores", scores_path %>
+  <% end %>
+
+  <%= button_to "Destroy this score", @score, class: "btn btn-primary", params: {qstudent: params[:qstudent], qstudentid: params[:qstudentid]}, method: :delete %>
+</div>
