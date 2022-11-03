@@ -1,0 +1,26 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Items</h1>
+
+<div id="items">
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Stock</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><%= item.price %></td>
+        <td><%= item.stock %></td>
+        <td><%= button_to "Edit", edit_item_path(item), class: "btn btn-primary", method: :get %></td>
+        <td><%= button_to "Destroy", item, class: "btn btn-primary", method: :delete %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<%= link_to "New item", new_item_path %>

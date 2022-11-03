@@ -1,0 +1,30 @@
+<h1>Buying item</h1>
+
+<% if @item.picture.attached? %>
+  <%= image_tag @item.picture.variant(:thumb) %>
+<% end %>
+
+<br><br>
+<p><b>Name:</b> <%= @item.name %></p>
+<p><b>Price:</b> <%= @item.price %></p>
+<p><b>Stock:</b> <%= @item.stock %></p>
+
+<%= form_with url: "/buy/#{params[:id]}", method: :post do |form| %>
+
+  <div>
+    <%= form.label :quantity, style: "display: block" %>
+    <%= form.number_field :quantity %>
+  </div>
+
+  <br>
+
+  <div>
+    <%= form.submit "Buy", class: "btn btn-primary" %>
+  </div>
+
+<% end %>
+<br>
+
+<div>
+  <%= link_to "Back to shop", items_path %>
+</div>

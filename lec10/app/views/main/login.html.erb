@@ -1,0 +1,26 @@
+<% if @user %>
+  <p>Logged in as <%= @user.name %></p>
+<% else %>
+  <% flash.each do |type, msg| %>
+    <p><%= msg %></p>
+  <% end %>
+
+  <h1>Hi</h1>
+  <%= form_with url: main_authenticate_path, method: :post, data: {turbo: false} do |form| %>
+    <div class="mb-3 row">
+      <%= form.label :login, class: "col-lg-1 col-form-label" %>
+      <div class="col-lg-10">
+        <%= form.text_field :login, class: "form-control-md" %>
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <%= form.label :password, class: "col-lg-1 col-form-label" %>
+      <div class="col-lg-10">
+      <%= form.password_field :password, class: "form-control-md" %>
+      </div>
+    </div>
+    <div class="col-auto">
+      <%= form.submit "login", class: "btn btn-primary mb-3" %>
+    </div>
+  <% end %>
+<% end %>

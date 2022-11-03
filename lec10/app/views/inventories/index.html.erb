@@ -1,0 +1,26 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Inventories</h1>
+
+<div id="inventories">
+  <% if @inventories.length<=0 %>
+    <p>Nothing to show...</p>
+  <% else %>
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Timestamp</th>
+      </tr>
+      <% @inventories.each do |inventory| %>
+        <tr>
+          <td><%= Item.find(inventory.item_id).name %></td>
+          <td><%= inventory.price %></td>
+          <td><%= inventory.quantity %></td>
+          <td><%= inventory.created_at.strftime("%d/%m/%Y %I:%M %p") %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
+</div>

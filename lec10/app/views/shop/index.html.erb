@@ -1,0 +1,22 @@
+<p style="color: pink"><%= notice %></p>
+
+<h1><%= "#{@seller.name}\'s" %> shop</h1>
+
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Stock</th>
+    <th></th>
+  </tr>
+  <% @items.each do |item| %>
+    <tr>
+      <td><%= item.name %></td>
+      <td><%= item.price %></td>
+      <td><%= item.stock %></td>
+      <% if session[:uid] %>
+        <td><%= button_to "Buy", "/buy/#{item.id}", class: "btn btn-primary", method: :get %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
