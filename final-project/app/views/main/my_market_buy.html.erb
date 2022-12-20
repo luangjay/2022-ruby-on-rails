@@ -1,0 +1,51 @@
+<%= render "navigation" %>
+
+<p style="color:green"><%= notice %></p>
+
+<h1>Buy item</h1>
+
+<%= form_with url: "/my_market/buy/#{@market.id}", method: :post, data: {turbo: false} do |form| %>
+  <%= form.hidden_field :'inventory[user_id]', value: session[:uid] %>
+  <%= form.hidden_field :'inventory[seller_id]', value: @market.user_id %>
+  <%= form.hidden_field :'inventory[item_id]', value: @market.item_id  %>
+  <%= form.hidden_field :'inventory[price]', value: @market.price %>
+
+  <div>
+    <p>
+      <strong>Item:</strong>
+      <%= Item.find(@market.item_id).name %>
+    </p>
+
+    <p>
+      <strong>Category:</strong>
+      <%= Item.find(@market.item_id).category %>
+    </p>
+
+    <p>
+      <strong>Seller:</strong>
+      <%= User.find(@market.user_id).name %>
+    </p>
+
+    <p>
+      <strong>Price:</strong>
+      <%= @market.price %>
+    </p>
+
+    <p>
+      <strong>Stock:</strong>
+      <%= @market.stock %>
+    </p>
+
+    <p class="col-6 col-sm-6 col-md-3">
+      <%= form.label 'Quantity', style: "display: block" %>
+      <%= form.number_field :'inventory[qty]', min: 1, max: @market.stock, required: true, class: "form-control" %>
+    </p>
+  
+    <p>
+      <%= form.submit 'Buy', class: 'btn btn-primary' %>
+    </p>
+  </div>
+
+
+  
+<% end %>

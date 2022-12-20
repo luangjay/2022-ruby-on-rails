@@ -1,0 +1,42 @@
+<div class="float-end">
+  <% if current_page?(main_path) %>
+    <strong>Main</strong>
+  <% else %>
+    <%= link_to 'Main', main_path, data: {turbo: false}, style: "font-size:0.875rem" %>
+  <% end %>
+  | <% if current_page?(profile_path) %>
+      <strong>Profile</strong>
+    <% else %>
+      <%= link_to 'Profile', profile_path, data: {turbo: false}, style: "font-size:0.875rem" %>
+    <% end %>
+  <% if [0,2].include? @user.user_type %>
+    | <% if current_page?(my_market_path) %>
+        <strong>My market</strong>
+      <% else %>
+        <%= link_to 'My market', my_market_path, data: {turbo: false}, style: "font-size:0.875rem" %>
+      <% end %>
+    | <% if current_page?(purchase_history_path) %>
+        <strong>Purchase history</strong>
+      <% else %>
+        <%= link_to 'Purchase history', purchase_history_path, data: {turbo: false}, style: "font-size:0.875rem" %>
+      <% end %>
+  <% end %>
+  <% if [0,1].include? @user.user_type %>
+    | <% if current_page?(my_inventory_path) %>
+        <strong>My inventory</strong>
+      <% else %>
+        <%= link_to 'My inventory', my_inventory_path, data: {turbo: false}, style: "font-size:0.875rem" %>
+      <% end %>
+    | <% if current_page?(sale_history_path) %>
+        <strong>Sale history</strong>
+      <% else %>
+        <%= link_to 'Sale history', sale_history_path, data: {turbo: false}, style: "font-size:0.875rem" %>
+      <% end %>
+    | <% if current_page?(top_seller_path) %>
+        <strong>Top seller</strong>
+      <% else %>
+        <%= link_to 'Top seller', top_seller_path, data: {turbo: false}, style: "font-size:0.875rem" %>
+      <% end %>
+  <% end %>
+  | <%= link_to 'Logout', logout_path, data: {turbo: false}, style: "font-size:0.875rem" %>
+</div>

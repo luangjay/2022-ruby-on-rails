@@ -1,0 +1,103 @@
+<%= render "navigation" %>
+
+<p style="color:green"><%= notice %></p>
+
+<h1>Top seller</h1>
+
+<%= form_with url: "/top_seller", method: :post, data: {turbo: false} do |form| %>
+  <div class="row g-2 float-start align-items-end">
+    <div class="col-auto">
+      <%= form.label "Order by", for: "mode", style: "display: block" %>
+      <%= form.select :mode,  ["transaction", "quantity"], {selected: @mode}, {class: "form-select"} %>
+    </div>
+    <div class="col-auto">
+      <%= form.submit 'Sort', class: "btn btn-outline-primary" %>
+    </div>
+  </div>
+<% end %>
+
+<%= form_with url: "/top_seller", method: :post, data: {turbo: false} do |form| %>
+  <div class="row g-2 float-end align-items-end">
+    <div class="col-4 col-sm-auto col-md-auto">
+      <%= form.label 'Start date:' %>
+      <%= form.date_field :start_date, value: params[:start_date], class: "form-control" %>
+    </div>
+    <div class="col-4 col-sm-auto col-md-auto">
+      <%= form.label 'End date:' %>
+      <%= form.date_field :end_date, value: params[:end_date], class: "form-control" %>
+    </div>
+    <div class="col-2">
+      <%= form.submit 'Filter', class: "btn btn-outline-primary" %>
+    </div>
+  </div>
+<% end %>
+
+<div style="width:100%">
+  <div class="top3s text-center ">
+    <p></p>
+    <div class="card top2">
+      <% if @sellers.second %>
+        <% top2 = User.find(@sellers.second.seller_id) %>
+        <p></p>
+        <h6><strong><%= top2.name %></strong></h6>
+        <% if top2.picture.attached? %>
+          <%= image_tag top2.picture.variant(:thumb), class: "rounded-circle shadow-4", alt: "Avatar", width:"67%" %>
+        <% else %>
+          <%= render "default_avatar" %>
+        <% end %>
+        <div style="font-size:8vh;"><strong><%= @sellers.second.count %></strong></div>
+        <div style="">Total sales</div>
+        <p></p>
+      <% else %>
+        <p></p>
+        None
+      <% end %>
+    </div>
+    
+    <div class="card top1">
+      <% if @sellers.first %>
+        <% top1 = User.find(@sellers.first.seller_id) %>
+        <p></p>
+        <h5><strong><%= top1.name %></strong></h5>
+        <% if top1.picture.attached? %>
+          <%= image_tag top1.picture.variant(:thumb), class: "rounded-circle shadow-4", alt: "Avatar", width:"67%" %>
+        <% else %>
+          <%= render "default_avatar" %>
+        <% end %>
+        <div style="font-size:8vh;"><strong><%= @sellers.first.count %></strong></div>
+        <div>Total sales</div>
+        <p></p>
+      <% else %>
+        <p></p>
+        None
+      <% end %>
+    </div>
+
+    <div class="card top3">
+      <% if @sellers.third %>
+        <% top3 = User.find(@sellers.third.seller_id) %>
+        <p></p>
+        <h6><strong><%= top3.name %></strong></h6>
+        <% if top3.picture.attached? %>
+          <%= image_tag top3.picture.variant(:thumb), class: "rounded-circle shadow-4", alt: "Avatar", width:"67%" %>
+        <% else %>
+          <%= render "default_avatar" %>
+        <% end %>
+        <div style="font-size:8vh;"><strong><%= @sellers.third.count %></strong></div>
+        <div>Total sales</div>
+        <p></p>
+      <% else %>
+        <p></p>
+        None
+      <% end %>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .top3s {  width:100%;display:inline-block; }
+  .top1  {  width:40%;aspect-ratio:1;display:inline-block;vertical-align:bottom; }
+  .top2  {  width:30%;aspect-ratio:1;display:inline-block;vertical-align:bottom; }
+  .top3  {  width:25%;aspect-ratio:1;display:inline-block;vertical-align:bottom; }
+</style>

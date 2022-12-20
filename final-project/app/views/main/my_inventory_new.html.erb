@@ -1,0 +1,28 @@
+<%= render "navigation" %>
+
+<p style="color:green"><%= notice %></p>
+
+<h1>Add item</h1>
+
+<%= form_with url: '/my_inventory/new', method: :post, data: {turbo: false} do |form| %>
+  <%= form.hidden_field :'market[user_id]', value: session[:uid] %>
+
+  <p class="col-6 col-sm-6 col-md-3">
+    <%= form.label 'Item', for: "market[item_id]", style: "display: block" %>
+    <%= form.collection_select :'market[item_id]', @items, :id, :name, {required: true}, {class: "form-select"} %>
+  </p>
+
+  <p class="col-6 col-sm-6 col-md-3">
+    <%= form.label 'Price', for: "market[price]", style: "display: block" %>
+    <%= form.number_field :'market[price]', step: :any, min: 0, required: true, class: "form-control" %>
+  </p>
+
+  <p class="col-6 col-sm-6 col-md-3">
+    <%= form.label 'Stock', for: "market[stock]", style: "display: block" %>
+    <%= form.number_field :'market[stock]', min: 0, required: true, class: "form-control" %>
+  </p>
+
+  <p>
+    <%= form.submit 'Add', class: 'btn btn-primary' %>
+  </p>
+<% end %>

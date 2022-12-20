@@ -1,0 +1,28 @@
+<%= render "navigation" %>
+
+<p style="color:green"><%= notice %></p>
+
+<h1>Edit item</h1>
+
+<%= form_with url: "/my_inventory/edit/#{@market.id}", method: :post, data: {turbo: false} do |form| %>
+  <%= form.hidden_field :'market[user_id]', value: session[:uid] %>
+
+  <p class="col-6 col-sm-6 col-md-3">
+    <%= form.label 'Item', for: "market[item_id]", style: "display: block" %>
+    <%= form.text_field :'market[item_id]', value: Item.find(@market.item_id).name, disabled: true, class: "form-control" %>
+  </p>
+
+  <p class="col-6 col-sm-6 col-md-3">
+    <%= form.label 'Price', for: "market[price]", style: "display: block" %>
+    <%= form.number_field :'market[price]', value: @market.price, disabled: true, class: "form-control" %>
+  </p>
+
+  <p class="col-6 col-sm-6 col-md-3">
+    <%= form.label 'Stock', for: "market[stock]", style: "display: block" %>
+    <%= form.number_field :'market[stock]', value: @market.stock, min: 0, required: true, class: "form-control" %>
+  </p>
+
+  <p>
+    <%= form.submit 'Edit', class: 'btn btn-primary' %>
+  </p>
+<% end %>
